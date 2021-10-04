@@ -1,27 +1,48 @@
-const _mergeArrays = (a, b) => {
-  const c = []
+  var array_length;
+/* to create MAX  array */  
+function heap_root(input, i) {
+    var left = 2 * i + 1;
+    var right = 2 * i + 2;
+    var max = i;
 
-  while (a.length && b.length) {
-    c.push(a[0] > b[0] ? b.shift() : a.shift())
-  }
+    if (left < array_length && input[left] > input[max]) {
+        max = left;
+    }
 
-  //if we still have values, let's add them at the end of `c`
-  while (a.length) {
-    c.push(a.shift())
-  }
-  while (b.length) {
-    c.push(b.shift())
-  }
+    if (right < array_length && input[right] > input[max])     {
+        max = right;
+    }
 
-  return c
+    if (max != i) {
+        swap(input, i, max);
+        heap_root(input, max);
+    }
 }
 
-const mergeSort = (a) => {
-  if (a.length < 2) return a
-  const middle = Math.floor(a.length / 2)
-  const a_l = a.slice(0, middle)
-  const a_r = a.slice(middle, a.length)
-  const sorted_l = mergeSort(a_l)
-  const sorted_r = mergeSort(a_r)
-  return _mergeArrays(sorted_l, sorted_r)
+function swap(input, index_A, index_B) {
+    var temp = input[index_A];
+
+    input[index_A] = input[index_B];
+    input[index_B] = temp;
 }
+
+function heapSort(input) {
+    
+    array_length = input.length;
+
+    for (var i = Math.floor(array_length / 2); i >= 0; i -= 1)      {
+        heap_root(input, i);
+      }
+
+    for (i = input.length - 1; i > 0; i--) {
+        swap(input, 0, i);
+        array_length--;
+      
+      
+        heap_root(input, 0);
+    }
+}
+
+var arr = [3, 0, 2, 5, -1, 4, 1];
+heapSort(arr);
+console.log(arr);
