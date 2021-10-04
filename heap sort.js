@@ -1,5 +1,4 @@
   var array_length;
-/* to create MAX  array */  
 function heap_root(input, i) {
     var left = 2 * i + 1;
     var right = 2 * i + 2;
@@ -17,7 +16,8 @@ function heap_root(input, i) {
         swap(input, i, max);
         heap_root(input, max);
     }
-}
+}/* create a max ARRAY */  
+
 
 function swap(input, index_A, index_B) {
     var temp = input[index_A];
@@ -43,6 +43,6 @@ function heapSort(input) {
     }
 }
 
-var arr = [3, 0, 2, 5, -1, 4, 1];
+var arr = [6, 0, 7, -5, 7, 2];
 heapSort(arr);
 console.log(arr);
